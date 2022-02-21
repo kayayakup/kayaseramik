@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main-section-container" id="aboutme">
+  <div class="container wrapper">
+   <div class="row">
+    <div class="col-sm-12 col-md-3 bg-light">
+     <div class="profile-section">
+      <img class="img-fluid custom-circle rounded-circle" src="https://i.dailymail.co.uk/i/pix/2015/08/09/22/2B39D3C100000578-0-image-m-15_1439157373054.jpg" alt="Profile Picture">
+      <h3 class="color-primary font-weight-normal">Murat KAYA</h3>
+      <h5 class="text-muted">İnşaat Ustası</h5>
+      <hr class="small-hr">
+      <h4><i class="fa fa-user-circle-o" aria-hidden="true"></i> Hakkımda</h4><br>
+      <p>Genç yaşımdan beri inşaat sektöründe çıraklıktan ustalığa kadar her işi deneyimleyip, inşaat sektörü hakkında bilgi birikimi ve deneyimine sahip inşaat ustasıyım.</p>
+      <hr class="small-hr">
+      
+     </div>
+     <!-- /.profile-section -->
+    </div>
+    <!-- /.col-3 -->
+ 
+    <div class="col-sm-12 col-md-9" style="line-height: 75px;">
+     <div class="main-section">
+      <div class="container">
+        <h1 class="title-skills">İŞÇİLİK</h1>
+        <div class="bar">
+          <div class="skill">SIVA</div>
+          <div class="bar-outer">
+            <div class="bar-inner ht"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="skill">DUVAR ÖRME</div>
+          <div class="bar-outer">
+            <div class="bar-inner jq"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="skill">FAYANS</div>
+          <div class="bar-outer">
+            <div class="bar-inner sk"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="skill">BOYA</div>
+          <div class="bar-outer">
+            <div class="bar-inner ph"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="skill">KAPI MONTAJI</div>
+          <div class="bar-outer">
+            <div class="bar-inner il"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="skill">DIŞ CEPHE KAPLAMA</div>
+          <div class="bar-outer">
+            <div class="bar-inner in"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="skill">KALIP</div>
+          <div class="bar-outer">
+            <div class="bar-inner fl"></div>
+          </div>
+        </div>
+      </div>
+      <!-- /.skill-section -->
+ 
+      
+       <!-- /.col-12 -->
+      </div>
+      <!-- /.work-section -->
+     </div>
+     <!-- /.section -->
+    </div>
+    <!-- /.col-9 -->
+   </div>
+   <!-- /.row -->
+  </div><br><br><br><br><br><br><br>
+  <!-- /.container -->
+ <!-- /.main-section-container -->
+
+  <!--<div class="row">
+    {% for post in object_list %}
+    <div class="card col-lg-6 offset-lg-3 mb-3">
+      {% if post.image %}
+      <img class="card-img-top mt-3" src="{{ post.image.url }}" alt="{{ post.title }}">
+      {% endif %}
+      <div class="card-body">
+        <a href="{% url 'core:post' post.id post.slug %}">
+          <h2 class="card-title my-3">{{ post.title }} </h2>
+        </a>
+        <div class="text-muted mb-3">
+          <div>
+            <span>created: {{ post.created_on|date:"N j Y" }} |</span>
+            <span>updated: {{ post.updated_on|timesince }} ago |</span>
+            <span>author: {{ post.author }}</span>
+          </div>
+          <div>
+            {% for tag in post.tags.all %}
+            <span class="badge badge-dark">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+        <a class='btn btn-primary' href="{% url 'core:post' post.id post.slug %}">Read more ...</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>-->
+<div class="container" id="bussines" style="z-index: -2px;">
+  {% for post in object_list %}
+  {% if forloop.counter0|divisibleby:3 %} <div class="row text-center"> {%  endif %}
+  <div class="scene col-md-4">
+    <div class="card" style="border-radius: 30px; margin-bottom: 350px;">
+      <div style="border-radius: 30px;" class="card__face card__face--front" >
+        <img style="border-radius: 30px;" src="{{ post.image.url }}" />
+      </div>
+      <div style="border-radius: 30px;" class="card__face card__face--back">
+        <img style="border-radius: 30px;" src="{{ post.image.url }}" alt="{{post.name}}">
+        <b><h3 style="font-size: 40px;">{{ post.title }}</h3></b>
+        <span>{{ post.content|truncatewords:30 }}</span>
+        <a class='btn btn-info' style="width: 99px; height: cover;" href="{% url 'core:post' post.id post.slug %}">Detaylar...</a><br>
+        <span style="font-size: 10px;">created: {{ post.created_on|date:"N j Y" }} |</span>
+        <span style="font-size: 10px;">updated: {{ post.updated_on|timesince }} ago |</span>
+      </div>
+    </div>
+  </div>
+  {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><!-- row closing -->{%  endif %}
+
+{% endfor %}
+</div>
+
+
+
+
+  <!-- Pagination -->
+  <div>
+    <nav class="col-lg-6 offset-lg-3 mt-4 d-flex justify-content-center" style="width: 100%;">
+      <ul class="pagination">
+
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Önceki</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">Önceki</a>
+        </li>
+        {% endif %}
+  
+        {% for i in page_obj.paginator.page_range %}
+        <li class=" page-item {% if page_obj.number == i %}active{% endif %}">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Sonraki</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">Sonraki</a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </nav>
+  </div>
+  <!-- /Pagination -->
+{% endblock content %}

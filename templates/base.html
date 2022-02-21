@@ -1,0 +1,702 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway+Dots" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    type="text/css" />
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <style>
+    body {
+      height: 0px;
+      background-color: rgb(107, 70, 0);
+    }
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block;
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    blockquote,
+    q {
+      quotes: none;
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+      content: "";
+      content: none;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+    .wrapper {
+      max-width: 1140px;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+
+    a {
+      text-decoration: none;
+      color: #222;
+    }
+
+    .sr-only {
+      position: absolute;
+      clip: rect(1px, 1px, 1px, 1px);
+      padding: 0;
+      border: 0;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+    }
+
+    .button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      color: #fff;
+      background-color: #2fa0f6;
+      min-width: 120px;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .button svg {
+      display: inline-block;
+      vertical-align: middle;
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+
+    .button span {
+      display: none;
+    }
+
+    @media (min-width: 600px) {
+      .button span {
+        display: initial;
+      }
+    }
+
+    .button--icon {
+      min-width: initial;
+      padding: 0.5rem;
+    }
+
+    /* 
+** The Header Media Queries **
+** Tweak as per your needs **
+*/
+    .brand {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .site-header {
+      position: relative;
+      background-color: #def7ff;
+    }
+
+    .site-header__start {
+      display: flex;
+      align-items: center;
+    }
+
+    .site-header__end {
+      display: flex;
+      align-items: center;
+    }
+
+    .site-header__wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    @media (min-width: 865px) {
+      .site-header__wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+
+    @media (min-width: 865px) {
+      .nav__wrapper {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 864px) {
+      .nav__wrapper {
+        position: absolute;
+        top: calc(100% + 35px);
+        right: 0;
+        left: 0;
+        z-index: 1;
+        background-color: #d9f0f7;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+      }
+
+      .nav__wrapper.active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (min-width: 865px) {
+      .nav__item:first-child a {
+        border-left: 1px solid #8a8383;
+      }
+    }
+
+    .nav__item:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+
+    .nav__item a {
+      display: block;
+      padding: 1rem;
+      border-left: 4px solid transparent;
+    }
+
+    @media (min-width: 865px) {
+      .nav__item a {
+        border-right: 1px solid #8a8383;
+        text-align: center;
+        box-shadow: inset 0 -4px 0 0 transparent;
+      }
+    }
+
+    .nav__item svg {
+      display: inline-block;
+      vertical-align: middle;
+      width: 28px;
+      height: 28px;
+      margin-right: 1rem;
+    }
+
+    @media (min-width: 865px) {
+      .nav__item svg {
+        display: block;
+        margin: 0 auto 0.5rem;
+      }
+    }
+
+    @media (min-width: 865px) {
+      .nav__item.active a {
+        box-shadow: inset 0 -4px 0 0 #222;
+      }
+    }
+
+    .nav__toggle {
+      display: none;
+    }
+
+    @media (max-width: 864px) {
+      .nav__toggle {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+      }
+    }
+
+    footer .main-gradient {
+      height: 70px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .main-gradient {
+      background: -moz-linear-gradient(top, #00b4da 0%, #363636 100%);
+      /* FF3.6+ */
+      background: linear-gradient(to bottom, #00b4da 0%, #363636 100%);
+      /* W3C */
+    }
+
+    #main {
+      padding-bottom: 150px;
+    }
+
+    /* must be same height as the footer */
+
+    .bigdiv {
+      height: 250px;
+    }
+
+    footer {
+      position: relative;
+      margin-top: -150px;
+      /* negative value of footer height */
+      height: 150px;
+      clear: both;
+      background: #363636;
+    }
+
+    /* End hide from IE-mac */
+
+    /* end sticky footer stuff from css-tricks.com */
+
+    @-webkit-keyframes dot-move {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 0 -100px;
+      }
+    }
+
+    .fade-top {
+      left: 0px;
+      right: 0px;
+
+      background: -webkit-linear-gradient(bottom,
+          rgba(0, 180, 212, 0),
+          #00b4d4);
+    }
+
+    .dots {
+      height: 250px;
+      width: 100%;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      background-position: 0% 0%;
+      position: relative;
+
+      -webkit-animation-name: dot-move;
+      -webkit-animation-duration: 3s;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+    }
+
+    @media screen and (max-width: 768px) {
+      section {
+        bottom: 0px;
+        height: 1150px;
+      }
+
+      section ul {
+        bottom: 0px;
+        height: 1150px;
+      }
+
+      .dots {
+        bottom: 0px;
+        height: 1150px;
+      }
+    }
+
+    .dots {
+      background: url(data:image/png;base64,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);
+    }
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+.container {
+  margin-top: 2em;
+}
+
+.title-skills {
+  color: white;
+  font-size: 2em;
+  margin-top: 4em;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  transition: all 400ms ease-in-out;
+  margin: 4rem auto;
+  text-align: center;
+}
+
+.bar {
+  width: 80%;
+  margin: 2em auto;
+}
+
+.skill {
+  color: white;
+  font-size: .8em;
+  text-transform: uppercase;
+  margin-bottom: 0.25em;
+}
+
+.speech-bubble {
+  font-size: 0.75em;
+  line-height: 2em;
+  position: absolute;
+  top: -2.7em;
+  text-align: center;
+  min-width: 3em;
+  border-radius: 0.3em;
+  display: none;
+}
+
+
+.sketch,
+.illustrator {
+  left: calc(90% - 1.5em);
+}
+
+.indesign {
+  left: calc(85% - 1.5em);
+}
+
+.speech-bubble:after {
+  border: 0.5em solid transparent;
+  content: "";
+  margin-left: -0.5em;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+}
+
+.bar-outer {
+  height: 1.25em;
+  background: #EEEEEE;
+  position: relative;
+  border-radius: 0.3em;
+}
+
+.bar-inner {
+  width: 0;
+  height: 1.25em;
+  border-radius: 0.3em;
+}
+
+.ht, .html {
+  background: #ff0000;
+}
+
+.html:after {
+  border-top-color: #ff0000;
+}
+
+.jq, .jquery {
+  background: #fbff00;
+}
+
+.jquery:after {
+  border-top-color: #fbff00;
+}
+
+.sk, .sketch {
+  background: #00ffd5;
+}
+
+.sketch:after {
+  border-top-color: #00ffd5;
+}
+
+.ph, .photo {
+  background: #e100ff;
+}
+
+.photo:after {
+  border-top-color: #e100ff;
+}
+
+.il, .illustrator {
+  background: #ffd000;
+}
+
+.illustrator:after {
+  border-top-color: #ffd000;
+}
+
+.in, .indesign {
+  background: #0026ff;
+}
+
+.indesign:after {
+  border-top-color: #0026ff;
+}
+
+.fl, .fluent {
+  background: #ff0000;
+}
+
+.fluent:after {
+  border-top-color: #ff0000;
+}
+  </style>
+
+  <title>{% block head_title %}KAYA DEKORASYON{% endblock %}</title>
+</head>
+
+<body>
+  <!-- Header Start -->
+  <header class="site-header">
+    <div class="wrapper site-header__wrapper">
+      <div class="site-header__start">
+        <a href="{% url 'core:home' %}" class="brand">
+          <img src="/static/img/KDLogo.jpg" alt="Logo" style="width: 200px" />
+        </a>
+      </div>
+      <div class="site-header__end">
+        <nav class="nav" style="height: 83px">
+          <button class="nav__toggle" aria-expanded="false" type="button">
+            menu
+          </button>
+          <ul class="nav__wrapper">
+            <li class="nav__item active">
+              <a href="#aboutme">
+                <svg viewBox="0 0 24 24" width="24px" height="24px" x="0" y="0" preserveAspectRatio="xMinYMin meet"
+                  class="nav-icon" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M22,9.45,12.85,3.26A1.52,1.52,0,0,0,12,3a1.49,1.49,0,0,0-.84.26L2,9.45,3.06,11,4,10.37V20a1,1,0,0,0,1,1h5V16h4v5h5a1,1,0,0,0,1-1V10.37l.94.63Z"
+                    class="active-item" style="fill-opacity: 1"></path>
+                  <path
+                    d="M22,9.45L12.85,3.26a1.5,1.5,0,0,0-1.69,0L2,9.45,3.06,11,4,10.37V20a1,1,0,0,0,1,1h6V16h2v5h6a1,1,0,0,0,1-1V10.37L20.94,11ZM18,19H15V15a1,1,0,0,0-1-1H10a1,1,0,0,0-1,1v4H6V8.89l6-4,6,4V19Z"
+                    class="inactive-item" style="fill: currentColor"></path>
+                </svg>
+                <span>Hakkımda</span>
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="#bussines">
+                <svg viewBox="0 0 24 24" width="24px" height="24px" x="0" y="0" preserveAspectRatio="xMinYMin meet"
+                  class="nav-icon" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M2,13H22v6a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V13ZM22,8v4H2V8A1,1,0,0,1,3,7H7V6a3,3,0,0,1,3-3h4a3,3,0,0,1,3,3V7h4A1,1,0,0,1,22,8ZM15,6a1,1,0,0,0-1-1H10A1,1,0,0,0,9,6V7h6V6Z"
+                    class="inactive-item" style="fill-opacity: 1"></path>
+                  <path
+                    d="M21,7H17V6a3,3,0,0,0-3-3H10A3,3,0,0,0,7,6V7H3A1,1,0,0,0,2,8V19a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V8A1,1,0,0,0,21,7ZM9,6a1,1,0,0,1,1-1h4a1,1,0,0,1,1,1V7H9V6ZM20,18H4V13H20v5Zm0-6H4V9H20v3Z"
+                    class="active-item" style="fill: currentColor"></path>
+                </svg>
+                <span>İşlerim</span>
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="#services">
+                <svg viewBox="0 0 24 24" width="24px" height="24px" x="0" y="0" preserveAspectRatio="xMinYMin meet"
+                  class="nav-icon" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M16,17.85V20a1,1,0,0,1-1,1H1a1,1,0,0,1-1-1V17.85a4,4,0,0,1,2.55-3.73l2.95-1.2V11.71l-0.73-1.3A6,6,0,0,1,4,7.47V6a4,4,0,0,1,4.39-4A4.12,4.12,0,0,1,12,6.21V7.47a6,6,0,0,1-.77,2.94l-0.73,1.3v1.21l2.95,1.2A4,4,0,0,1,16,17.85Zm4.75-3.65L19,13.53v-1a6,6,0,0,0,1-3.31V9a3,3,0,0,0-6,0V9.18a6,6,0,0,0,.61,2.58A3.61,3.61,0,0,0,16,13a3.62,3.62,0,0,1,2,3.24V21h4a1,1,0,0,0,1-1V17.47A3.5,3.5,0,0,0,20.75,14.2Z"
+                    class="inactive-item" style="fill-opacity: 1"></path>
+                  <path
+                    d="M20.74,14.2L19,13.54V12.86l0.25-.41A5,5,0,0,0,20,9.82V9a3,3,0,0,0-6,0V9.82a5,5,0,0,0,.75,2.63L15,12.86v0.68l-1,.37a4,4,0,0,0-.58-0.28l-2.45-1V10.83A8,8,0,0,0,12,7V6A4,4,0,0,0,4,6V7a8,8,0,0,0,1,3.86v1.84l-2.45,1A4,4,0,0,0,0,17.35V20a1,1,0,0,0,1,1H22a1,1,0,0,0,1-1V17.47A3.5,3.5,0,0,0,20.74,14.2ZM16,8.75a1,1,0,0,1,2,0v1.44a3,3,0,0,1-.38,1.46l-0.33.6a0.25,0.25,0,0,1-.22.13H16.93a0.25,0.25,0,0,1-.22-0.13l-0.33-.6A3,3,0,0,1,16,10.19V8.75ZM6,5.85a2,2,0,0,1,4,0V7.28a6,6,0,0,1-.71,2.83L9,10.72a1,1,0,0,1-.88.53H7.92A1,1,0,0,1,7,10.72l-0.33-.61A6,6,0,0,1,6,7.28V5.85ZM14,19H2V17.25a2,2,0,0,1,1.26-1.86L7,13.92v-1a3,3,0,0,0,1,.18H8a3,3,0,0,0,1-.18v1l3.72,1.42A2,2,0,0,1,14,17.21V19Zm7,0H16V17.35a4,4,0,0,0-.55-2l1.05-.4V14.07a2,2,0,0,0,.4.05h0.2a2,2,0,0,0,.4-0.05v0.88l2.53,1a1.5,1.5,0,0,1,1,1.4V19Z"
+                    class="active-item" style="fill: currentColor"></path>
+                </svg>
+                <span>Sosyal Ağlarım</span>
+              </a>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="nav__item">
+              <a href="{% url 'core:post_create' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  <path fill-rule="evenodd"
+                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                </svg>
+                <span>Post Ekle</span>
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="{% url 'users:logout' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+                  <path fill-rule="evenodd"
+                    d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                </svg>
+                <span>Çıkış</span>
+              </a>
+            </li>
+            {% else %}
+            <li class="nav__item">
+              <a href="{% url 'users:login' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+                </svg>
+                <span>Giriş</span>
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="{% url 'users:signup' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  <path fill-rule="evenodd"
+                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                </svg>
+                <span>Kaydol</span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- Header End -->
+  <br />
+
+  {% for message in signup.messages %}
+  <div
+    class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {{ message }}
+  {% endfor %}
+  {% block content %} {% endblock content %}<br><br><br>
+
+  <div class="dots">
+    <div class="fade-top">
+      <section>
+        <ul id="services">
+          <h2 style="margin: 0px;">KAYA DEKORASYON</h2>
+          <li>
+            <div class="facebook">
+              <a href="https://www.facebook.com/profile.php?id=100078113214312" target="_blank">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="twitter">
+              <a href="https://twitter.com/Murat_KAYA_36" target="_blank">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="youtube">
+              <a href="https://www.youtube.com/channel/UCbtXTUxXNtLaTB19amHa9iQ" target="_blank">
+                <i class="fa fa-youtube" aria-hidden="true"></i>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="linkedin">
+              <a href="https://www.linkedin.com/in/murat-kaya-/" target="_blank">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="instagram">
+              <a href="https://www.instagram.com/murat.36kaya/" target="_blank">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</body>
+<script>
+
+var skills = {
+  ht: 100,
+  jq: 90,
+  sk: 89,
+  ph: 88,
+  il: 96,
+  in: 93,
+  fl: 85
+};
+
+$.each(skills, function(key, value) {
+  var skillbar = $("." + key);
+
+  skillbar.animate(
+    {
+      width: value + "%"
+    },
+    1500,
+    function() {
+      $(".speech-bubble").fadeIn();
+    }
+  );
+}); 
+
+  $(function () {
+    var str = "#len"; //increment by 1 up to 1-nelemnts
+    $(document).ready(function () {
+      var i, stop;
+      i = 1;
+      stop = 4; //num elements
+      setInterval(function () {
+        if (i > stop) {
+          return;
+        }
+        $("#len" + i++).toggleClass("bounce");
+      }, 500);
+    });
+  });
+
+  let navToggle = document.querySelector(".nav__toggle");
+  let navWrapper = document.querySelector(".nav__wrapper");
+
+  navToggle.addEventListener("click", function () {
+    if (navWrapper.classList.contains("active")) {
+      this.setAttribute("aria-expanded", "false");
+      this.setAttribute("aria-label", "menu");
+      navWrapper.classList.remove("active");
+    } else {
+      navWrapper.classList.add("active");
+      this.setAttribute("aria-label", "close menu");
+      this.setAttribute("aria-expanded", "true");
+    }
+  });
+</script>
+
+</html>
